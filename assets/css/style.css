@@ -1,3 +1,14 @@
-body{  
+body{
+  font-family: Helvetica, Arial, sans-serif;
+  background: url("../images/background-image.jpg");  
   font-size: 16px;
+  color: navy;
+}
+
+h1{
+  font-weight: bolder;
+}
+
+input{
+  color:navy;
 }
