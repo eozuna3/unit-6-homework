@@ -6,6 +6,8 @@ $(document).ready(function () {
 
     //Ajax Query Variables and Function
     function displayGifInfo() {
+      //Clear out existing images and ratings
+      $("#food-view").empty();
 
       var food = $(this).val();
       food = food.replace(/ /g, "+");
@@ -24,13 +26,21 @@ $(document).ready(function () {
         for (let index = 0; index < foodArray.length; index++) {
           var foodDiv = $("<div>");
           console.log(foodArray[index].url);
+          
+          // Create Gif Image tags along with attributes to allow for activating each gif when clicked
           var foodGif = $("<img>").attr("src", foodArray[index].images.fixed_width_still.url);
+          foodGif.attr("data-state", "still");
+          foodGif.attr("data-still", foodArray[index].images.fixed_width_still.url);
+          foodGif.attr("data-animate", foodArray[index].images.fixed_width.mp4);
+          foodGif.addClass("Gif");
+
           console.log(foodArray[index].rating);
           var foodRating = $("<p>").text("Rating: " + foodArray[index].rating).css("color", "white");
 
           foodDiv.append(foodGif);
           foodDiv.append(foodRating);
           $("#food-view").append(foodDiv);
+          $("#food-view").append("<br>");
           
         }
       });
