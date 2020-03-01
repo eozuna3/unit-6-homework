@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <h1 class="text-center py-5">Giphy Search</h1>
+  <h1 class="text-center py-5">Giphy Keto Food Search</h1>
 
   <!-- Rendered Buttons will get Dumped Here  -->
   <div class="container">
@@ -64,7 +64,7 @@
       });
     }
 
-      // Creation of buttons
+      // Creation of buttons function
       function renderButtons() {
         $("#buttons-view").empty();
 
@@ -77,7 +77,23 @@
         }
       }
 
-      //Add Onclick event for buttons to use API to get and display Giphy info
+      // This function handles events the add food button is clicked
+      $("#add-food").on("click", function(event) {
+        event.preventDefault();
+        
+        // This line of code will grab the input from the textbox
+        var inputFood = $("#food-input").val().trim().toLowerCase();
+        console.log(inputFood);
+        
+        // The food from the textbox is then added to our array
+        topics.push(inputFood);
+
+        // Calling renderButtons which handles the processing of our food array
+        renderButtons();
+      });
+      
+      
+      // Add Onclick event for buttons to use API to get and display Giphy info
       $(document).on("click", ".food", displayGifInfo);
 
 
