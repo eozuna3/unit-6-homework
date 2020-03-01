@@ -11,8 +11,9 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="author" content="Eduardo Ozuna">
   <meta name="description" content="Giphy App">
 </head>
@@ -31,39 +32,56 @@
           <label for="food-input">Add a type of Keto food</label>
           <input type="text" id="food-input"><br>
 
-          <!-- Button triggers new movie to be added -->
+          <!-- Button triggers new food items to be added -->
           <input id="add-food" type="submit" value="Add a Keto food">
         </form>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript">
+  <script>
     // Initial array of movies
     var topics = ["avacodos", "pecans", "olive oil", "butter"];
 
-    
-    
-    /*Ajax Query Variables and Function
-    var food;
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=MxJ2uqQSNXnKFLKTEN5VoLMwQzA2Jfc9&q=" + food + "limit=25&offset=0&rating=G&lang=en";
 
-    $.ajax({
-      url: queryURL;
-    });*/
+
+    //Ajax Query Variables and Function
+    function displayGifInfo() {
+
+      var food = $(this).val();
+      food = food.replace(/ /g, "+");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=MxJ2uqQSNXnKFLKTEN5VoLMwQzA2Jfc9&q=" + food + "&limit=25&offset=0&rating=G&lang=en";
+      console.log(food);
+      console.log(queryURL);
     
-    // Creation of buttons function
-    function buttonCreation(){
-      for (let index = 0; index < topics.length; index++) {
-        var temp = $("<button>");
-        temp.addClass("btn btn-info btn-sm mx-2");
-        temp.text(topics[index]);
-        temp.val(topics[index]);
-        $("#buttons-view").append(temp);      
-      }
+
+      $.ajax({
+          url: queryURL,
+          method: "GET"
+      }).then(function (response) {
+        var temp = response.data;
+        console.log(temp);
+      });
     }
-    
-    buttonCreation();
+
+      // Creation of buttons
+      function renderButtons() {
+        $("#buttons-view").empty();
+
+        for (let index = 0; index < topics.length; index++) {
+          var temp = $("<button>");
+          temp.addClass("btn btn-info btn-sm mx-2 food");
+          temp.text(topics[index]);
+          temp.val(topics[index]);
+          $("#buttons-view").append(temp);
+        }
+      }
+
+      //Add Onclick event for buttons to use API to get and display Giphy info
+      $(document).on("click", ".food", displayGifInfo);
+
+
+      renderButtons();
   </script>
 
 
@@ -74,7 +92,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-  <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
