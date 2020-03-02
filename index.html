@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giphy App</title>
+  <title>Favorite Food Gif Search</title>
   <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
   <link rel="javascriptsheet" type="text/javascript" href="assets/javascript/app.js">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -13,35 +13,39 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <meta name="author" content="Eduardo Ozuna">
-  <meta name="description" content="Gif App">
+  <meta name="description" content="Favorite Food Gif Search">
 </head>
 
 <body>
-  <h1 class="text-center py-5">Keto Food Gif Search</h1>
+  <h1 class="text-center py-5">My Favorite Food Gif Search</h1>
 
-  <!-- Rendered Buttons will get Dumped Here  -->
+  <!-- Rendered Buttons will get Placed Here  -->
   <div class="container">
+    <div class="row">
+      <div class="col-md-12 pb-3 mb-3">
+        <p class="text-center">Please enter your favorite food into the text box.</p>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-9 py-3 mb-3">
         <div id="buttons-view"></div>
       </div>
       <div class="col-md-3 bg-light py-3 mb-3">
         <form id="food-form">
-          <label for="food-input">Add a Type of Keto food</label>
+          <label for="food-input">Type Your Favorite Food Here</label>
           <input type="text" id="food-input"><br><br>
 
           <!-- Button triggers new food items to be added -->
           <input id="add-food" type="submit" value="Add Food">
         </form>
       </div>
-    </div>  
+    </div>
   </div>
 
   <!-- Dynamically created Gifs will appear here -->
-  <div class="container-fluid">
-    <div id="food-view"></div>
+  <div class="container" id="gifContainer">
   </div>
 
 
@@ -52,7 +56,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-    <script src="assets/javascript/app.js"></script>
+  <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
