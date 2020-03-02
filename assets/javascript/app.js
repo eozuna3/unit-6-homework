@@ -1,7 +1,6 @@
 $(document).ready(function () {
   // Initializing array of Food
   var topics = [];
-  var rowAssignment = 0;
 
   // Function that displays the gifs associated with the buttons selected
   function displayGifInfo() {
@@ -12,8 +11,6 @@ $(document).ready(function () {
     var food = $(this).val();
     food = food.replace(/ /g, "+");
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=MxJ2uqQSNXnKFLKTEN5VoLMwQzA2Jfc9&q=" + food + "&limit=10&offset=0&rating=PG&lang=en";
-    console.log(food);
-    console.log(queryURL);
 
     // API Query and Function to create html gifs using information from the returned JSON
     $.ajax({
@@ -36,10 +33,15 @@ $(document).ready(function () {
         foodGif.addClass("img-fluid Gif");
         foodGif.width("75%").height("75%");
         var foodRating = $("<p>").text("Rating: " + foodArray[index].rating).css("color", "white");
+        var foodTitle = $("<p>").text("Title: " + foodArray[index].title).css("color", "white");
+        var foodURL = $("<a>").text("Giphy.com Link").css("color", "white");
+        foodURL.attr("href", foodArray[index].url).attr("target", "_blank");
 
         // Appending Gif and ratings elements to new Div element
         foodColumnDiv.append(foodGif);
         foodColumnDiv.append(foodRating);
+        foodColumnDiv.append(foodTitle);
+        foodColumnDiv.append(foodURL);
 
         // Create a new row after 3 gif columns have been created and to the previous row
         if (temp === 0) {
@@ -82,7 +84,6 @@ $(document).ready(function () {
     // This line of code will grab the input from the textbox
     var inputFood = $("#food-input").val().trim().toLowerCase();
     var usedFood = false;
-    console.log(inputFood);
 
     // Check to make sure food choice wasn't already entered
     for (var index = 0; index < topics.length; index++) {
@@ -101,7 +102,6 @@ $(document).ready(function () {
       $("#food-input").val("");
     }
   });
-
 
   // Add Onclick event for buttons to use API to get and display Giphy info
   $(document).on("click", ".food", displayGifInfo);
