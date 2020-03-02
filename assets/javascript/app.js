@@ -3,11 +3,11 @@ $(document).ready(function () {
   var topics = [];
   var rowAssignment = 0;
 
- // Function that displays the gifs associated with the buttons selected
+  // Function that displays the gifs associated with the buttons selected
   function displayGifInfo() {
-    // Clear out existing images and ratings
-    //$("#gifContainer").empty();
-    
+    // Disable gif button once click so it cannot get used again without reloading the page
+    $(this).prop("disabled", true);
+
     // Establish variables for function and API query string
     var food = $(this).val();
     food = food.replace(/ /g, "+");
@@ -24,25 +24,25 @@ $(document).ready(function () {
       console.log(foodArray);
 
       for (let index = 0; index < foodArray.length; index++) {
-        var temp = index%3;
-        console.log(temp);
+        var temp = index % 3;
         var foodColumnDiv = $("<div>");
         foodColumnDiv.addClass("col-md-4");
-        console.log(foodArray[index].url);
 
-        // Create Gif Image tags along with attributes to allow for activating each gif when clicked
+        // Create Gif Image element along with attributes to allow for activating each gif when clicked
         var foodGif = $("<img>").attr("src", foodArray[index].images.fixed_width_still.url);
         foodGif.attr("data-state", "still");
         foodGif.attr("data-still", foodArray[index].images.fixed_width_still.url);
         foodGif.attr("data-animate", foodArray[index].images.fixed_width.url);
         foodGif.addClass("img-fluid Gif");
+        foodGif.width("75%").height("75%");
         var foodRating = $("<p>").text("Rating: " + foodArray[index].rating).css("color", "white");
 
         // Appending Gif and ratings elements to new Div element
         foodColumnDiv.append(foodGif);
         foodColumnDiv.append(foodRating);
 
-        if(temp === 0){
+        // Create a new row after 3 gif columns have been created and to the previous row
+        if (temp === 0) {
           var foodRowDiv = $("<div>");
           foodRowDiv.addClass("row my-5");
           $("#gifContainer").append(foodRowDiv);
@@ -55,15 +55,12 @@ $(document).ready(function () {
   }
 
   // Creation of buttons function
-  function renderButtons() {
-    $("#buttons-view").empty();
-    for (let index = 0; index < topics.length; index++) {
-      var temp = $("<button>");
-      temp.addClass("btn btn-info btn-sm mx-2 food");
-      temp.text(topics[index]);
-      temp.val(topics[index]);
-      $("#buttons-view").append(temp);
-    }
+  function renderButtons(food) {
+    var newButton = $("<button>");
+    newButton.addClass("btn btn-info btn-sm mx-2 food");
+    newButton.text(food);
+    newButton.val(food);
+    $("#buttons-view").append(newButton);
   }
 
   // Function that activates gif images
@@ -78,7 +75,7 @@ $(document).ready(function () {
     }
   });
 
-  // This function handles events the add food button is clicked
+  // This function handles the events when the add food button is clicked
   $("#add-food").on("click", function (event) {
     event.preventDefault();
 
@@ -96,12 +93,12 @@ $(document).ready(function () {
         break;
       }
     }
-    
+
     // Add entered food choice into the food array
     if (!usedFood) {
       topics.push(inputFood);
+      renderButtons(inputFood);
       $("#food-input").val("");
-      renderButtons();
     }
   });
 

@@ -1,1 +1,7 @@
 # unit-6-homework
+
+This is my 6th assignment in which I created a gif search website. This assignement specifically utilized API queries in order to obtain information from other websites to dynamically create and update my page. This assignment is an intital introduction into the use of API queries.
+
+When the page initially loads the user is prompted to enter text into a text box regarding their favorite foods.  When the user enters there food into the text box and presses the Add Food it dymically 00creates a button for the food selection, and the DOM of the page thus adding the new button to a list of buttons on the page with other selections they have entered.  It will not let them enter the same food selection twice.
+
+The user can then can click on one of the created food buttons.  This action will activate the API query, and will pull information from the Giphy.com website.  The query specifically grabs 10 static gifs from the Giphy.com along with the metadata related to those gifs.  It will then dynamically create Bootstrap rows and columns posting 3 gifs per row along with metadata.  When the user clicks on a gif, it will imag source for the gif to an animated source if the gif was static and vice versa if the gif was animated.  If the user presses another food button, 10 more gifs will be added to previously add gifs.  Each time a food button is clicked it becomes deactivated so it cannot be used again.
